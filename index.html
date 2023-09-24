@@ -13,12 +13,12 @@
     <div class="calculator">
       <h1>Calculator</h1>
       <div class="screen">
-        <input type="text" id="operand"/>
+        <input type="text" id="operand" value="0"/>
       </div>
       <div class="buttons">
         <div class="row">
           <button onclick="clearInput()">C</button>
-          <button onclick="backspace()">
+          <button onclick="backspace()" id="backspace">
             <i class="material-icons">backspace</i>
           </button>
         </div>
@@ -43,7 +43,7 @@
         <div class="row">
           <button onclick="result()">=</button>
           <button onclick="appendDigit(0)">0</button>
-          <button onclick="appendDigit('.')">.</button>
+          <button onclick="appendDigit('.')" id="decimalButton">.</button>
           <button onclick="add()">+</button>
         </div>
       </div>
