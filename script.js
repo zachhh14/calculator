@@ -5,6 +5,7 @@ let addition = false;
 let subtraction = false;
 let multiplication = false;
 let division = false;
+const input = document.querySelector("#operand");
 
 function calculate() {
   let equals = 0;
@@ -67,4 +68,24 @@ function divide() {
   operand.push(getOperandValue());
   document.querySelector("#operand").value = "";
   division = true;
+}
+
+function appendDigit(inputValue){
+  if(!Boolean(input.value)){
+    input.value = inputValue;
+  }
+  else{
+    input.value = input.value.concat(inputValue);
+  }
+  
+}
+
+function clearInput(){
+  input.value = '';
+}
+
+function backspace(){
+  inputValue = input.value;
+  inputValue = inputValue.slice(0,-1);
+  input.value = inputValue;
 }
