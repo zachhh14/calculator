@@ -1,9 +1,12 @@
 const input = document.querySelector("#operand");
 const decimalButton = document.querySelector("#decimalButton");
 const backspaceButton = document.querySelector("#backspace");
-backspaceButton.disabled = true;
-let num1 = 0;
-let num2 = 0;
+const divisionButton = document.querySelector("#divisionButton");
+const multiplyButton = document.querySelector("#multiplyButton");
+const minusButton = document.querySelector("#minusButton");
+const addButton = document.querySelector("#addButton");
+const formulaScreen = document.querySelector("#formula");
+
 let operand = [];
 let addition = false;
 let subtraction = false;
@@ -45,33 +48,62 @@ function getOperandValue() {
   return parseInt(document.querySelector("#operand").value);
 }
 
-function add() {
-  clearInput();
-  operand.push(getOperandValue());
-  addition = true;
-}
-
 function result() {
-  clearInput();
-  console.log(calculate());
+  firstOperand = formulaScreen.textContent.slice(0, -1);
+  formulaText = formulaScreen.textContent;
+  operator = formulaText.charAt(formulaText.length - 1);
+  secondOperand = input.value;
+  switch (operator) {
+    case '+':
+      add(firstOperand, secondOperand);
+      break;
+    case '-':
+      console.log(operator);
+      minus(firstOperand, secondOperand);
+      break;
+    case 'x':
+      multiply(firstOperand, secondOperand);
+      break;
+      case '÷':
+      divide(firstOperand, secondOperand);
+      break;
+    default:
+      break;
+  }
 }
 
-function minus() {
-  clearInput();
-  operand.push(getOperandValue());
-  subtraction = true;
+function add(operationOne, operationTwo) {
+  operationOne = parseInt(operationOne);
+  operationTwo = parseInt(operationTwo);
+  resultValue = operationOne + operationTwo;
+  formulaScreen.textContent = `${operationOne} + ${operationTwo} = `
+  input.value = resultValue;
 }
 
-function multiply() {
-  clearInput();
-  operand.push(getOperandValue());
-  multiplication = true;
+
+function minus(operationOne, operationTwo) {
+  operationOne = parseInt(operationOne);
+  operationTwo = parseInt(operationTwo); 
+  resultValue = operationOne - operationTwo;
+  formulaScreen.textContent = `${operationOne} - ${operationTwo} = `
+  input.value = resultValue;
+  console.log(resultValue);
 }
 
-function divide() {
-  clearInput();
-  operand.push(getOperandValue());
-  division = true;
+function multiply(operationOne, operationTwo) {
+  operationOne = parseInt(operationOne);
+  operationTwo = parseInt(operationTwo); 
+  resultValue = operationOne * operationTwo;
+  formulaScreen.textContent = `${operationOne} x ${operationTwo} = `
+  input.value = resultValue;
+}
+
+function divide(operationOne, operationTwo) {
+  operationOne = parseInt(operationOne);
+  operationTwo = parseInt(operationTwo); 
+  resultValue = operationOne / operationTwo;
+  formulaScreen.textContent = `${operationOne} ÷ ${operationTwo} = `
+  input.value = resultValue;
 }
 
 function appendDigit(digit) {
@@ -87,7 +119,8 @@ function appendDigit(digit) {
 }
 
 function clearInput() {
-  decimalButton.disabled = false;
+  addButton.disabled = false;
+  formulaScreen.textContent = "";
   input.value = 0;
 }
 
@@ -95,9 +128,29 @@ function backspace() {
   inputValue = input.value;
   inputValue = inputValue.slice(0, -1);
   //checks if the digit in the screen is the last digit
-  if(inputValue.length === 0){ 
+  if (inputValue.length === 0) {
     input.value = 0;
   } else {
     input.value = inputValue;
   }
+}
+
+function appendFormula(operator){
+  switch (operator) {
+    case 'add':
+      formulaScreen.textContent = `${input.value} +`
+      break;
+    case 'minus':
+      formulaScreen.textContent = `${input.value} -`
+      break;
+    case 'multiply':
+      formulaScreen.textContent = `${input.value} x`
+    break;
+    case 'divide':
+      formulaScreen.textContent = `${input.value} ÷`
+      break
+    default:
+      break;
+  }
+  input.value = 0;
 }

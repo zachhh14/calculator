@@ -1,6 +1,7 @@
 * {
   margin: 0;
   font-size: 24px;
+  font-family: sans-serif;
 }
 
 body {
@@ -22,14 +23,22 @@ h1 {
 }
 
 .screen {
-  border: 1px solid black;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
   height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .screen > input {
-  height: 95px;
-  width: 315px;
   border: none;
+  text-align: end;
+  font-size: 32px;
+}
+
+.screen > span {
+  color: gray;
   text-align: end;
 }
 
@@ -50,4 +59,24 @@ h1 {
 .row > button {
   width: 75px;
   cursor: pointer;
+}
+
+button:active {
+  background-color: black;
+  color: white;
+}
+
+button {
+  background-color: white;
+  border: none;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  font-size: 20px;
 }
