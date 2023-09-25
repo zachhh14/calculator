@@ -30,7 +30,6 @@ function result() {
       break;
     }``
   resetCalculate = true;
-  console.log(resetCalculate);
 }
 
 function add(operationOne, operationTwo) {
@@ -67,7 +66,6 @@ function divide(operationOne, operationTwo) {
 }
 
 function appendDigit(digit) {
-  console.log(resetCalculate);
   backspaceButton.disabled = false;
   if(!resetCalculate){
     if (digit === ".") {
@@ -81,9 +79,7 @@ function appendDigit(digit) {
   } else {
     input.value = digit;
     formulaScreen.textContent = '';
-    console.log('inside the condition: '+resetCalculate);
     resetCalculate = false;
-    console.log('after modify: '+resetCalculate);
   }
 }
 
