@@ -6,47 +6,7 @@ const multiplyButton = document.querySelector("#multiplyButton");
 const minusButton = document.querySelector("#minusButton");
 const addButton = document.querySelector("#addButton");
 const formulaScreen = document.querySelector("#formula");
-
-let operand = [];
-let addition = false;
-let subtraction = false;
-let multiplication = false;
-let division = false;
-
-function calculate() {
-  let equals = 0;
-  switch (true) {
-    case addition:
-      for (let i = 0; i < operand.length; i++) {
-        equals += operand[i];
-      }
-      break;
-    case subtraction:
-      for (let i = 0; i < operand.length; i++) {
-        equals -= operand[i];
-      }
-      break;
-    case multiplication:
-      equals = 1;
-      for (let i = 0; i < operand.length; i++) {
-        equals *= operand[i];
-      }
-      break;
-    case division:
-      for (let i = 0; i < operand.length; i++) {
-        equals /= operand[i];
-      }
-      break;
-
-    default:
-      break;
-  }
-  return equals;
-}
-
-function getOperandValue() {
-  return parseInt(document.querySelector("#operand").value);
-}
+let resetCalculate = false;
 
 function result() {
   firstOperand = formulaScreen.textContent.slice(0, -1);
@@ -58,7 +18,6 @@ function result() {
       add(firstOperand, secondOperand);
       break;
     case '-':
-      console.log(operator);
       minus(firstOperand, secondOperand);
       break;
     case 'x':
@@ -69,7 +28,9 @@ function result() {
       break;
     default:
       break;
-  }
+    }``
+  resetCalculate = true;
+  console.log(resetCalculate);
 }
 
 function add(operationOne, operationTwo) {
@@ -87,7 +48,6 @@ function minus(operationOne, operationTwo) {
   resultValue = operationOne - operationTwo;
   formulaScreen.textContent = `${operationOne} - ${operationTwo} = `
   input.value = resultValue;
-  console.log(resultValue);
 }
 
 function multiply(operationOne, operationTwo) {
@@ -107,14 +67,23 @@ function divide(operationOne, operationTwo) {
 }
 
 function appendDigit(digit) {
+  console.log(resetCalculate);
   backspaceButton.disabled = false;
-  if (digit === ".") {
-    decimalButton.disabled = true;
-  }
-  if (input.value != 0 || digit === "." || decimalButton.disabled) {
-    input.value = input.value.concat(digit);
+  if(!resetCalculate){
+    if (digit === ".") {
+      decimalButton.disabled = true;
+    }
+    if (input.value != 0 || digit === "." || decimalButton.disabled) {
+      input.value = input.value.concat(digit);
+    } else {
+      input.value = digit;
+    }
   } else {
     input.value = digit;
+    formulaScreen.textContent = '';
+    console.log('inside the condition: '+resetCalculate);
+    resetCalculate = false;
+    console.log('after modify: '+resetCalculate);
   }
 }
 
@@ -136,6 +105,7 @@ function backspace() {
 }
 
 function appendFormula(operator){
+  resetCalculate = false;
   switch (operator) {
     case 'add':
       formulaScreen.textContent = `${input.value} +`
